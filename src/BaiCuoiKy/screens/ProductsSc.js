@@ -16,10 +16,19 @@ const data=[
     { key: '5' },
     { key: '6' },
 ]
+
+const sizeObj =[
+    'S',
+    'M',
+    'L',
+    'XL',
+    'XXL'
+]
 const screenWidth = Dimensions.get('window').width;
 function ProductDetail(props) {
     const [quantity,setQuantity] = useState(1);
-    const [favorite,setFavorite]=useState(false)
+    const [favorite,setFavorite]=useState(false);
+    const [size,setSize]=useState('S');
     const { productData } = props.route.params;
   
     console.log(favorite)
@@ -34,7 +43,8 @@ function ProductDetail(props) {
         instance.patch('/user/cart',{
             productId:productData._id,
             quantity,
-            price:productData.price
+            price:productData.price,
+            size:productData.size
         })
         .then(()=>{
             console.log('thêm vào cart thành công')
@@ -183,7 +193,7 @@ function ProductDetail(props) {
                             productData.description
                         }
                     </Text>
-                    {/* <View 
+                    <View 
                         style={{
                             flexDirection:'row',
                             alignItems:'center',
@@ -192,19 +202,41 @@ function ProductDetail(props) {
                            
                         }}
                     >
-                        Color : 
+                        <Text>Size:</Text>
                         <View
-                            style={styles.colorContainer}
+                            
                         >
-                            <TouchableOpacity
+
+                            <FlatList
+                            horizontal={true}
+                            data={sizeObj}
+                            renderItem={({item,index})=>{
+                                return (
+                                    <TouchableOpacity
+                                    onPress ={()=>setSize(item)}
+                                    style={[styles.button,size===item?{backgroundColor:mainColor,color:'white'}:{     backgroundColor:inputColor,}]}
+                                >
+                                    <Text
+                                         style={size===item?{color:'white'}:{color:'black'}}
+                                    >
+                                        {item}
+                                    </Text>
+                                    
+                                </TouchableOpacity>
+                                )
+
+                            }}
+                            />
+                          
+                            {/* <TouchableOpacity
                                 style={styles.button}
                             >
+                            
                                 <Text
-                                    
+                                     
                                 >
-                                    White
+                                    M
                                 </Text>
-                                
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.button}
@@ -213,13 +245,13 @@ function ProductDetail(props) {
                                 <Text
                                      
                                 >
-                                    Black
+                                    XL
                                 </Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                         </View>
                         
                         
-                    </View> */}
+                    </View>
                     <View
                          style={{
                             flexDirection:'row',
@@ -368,14 +400,14 @@ const styles = StyleSheet.create({
 
     },
     button:{
-        width:100,
+        width:50,
         height:30,
         padding:4,
-        backgroundColor:mainColor,
+        
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
-        backgroundColor:inputColor,
+   
         borderRadius:999
     },
     buttonBuyFavo:{

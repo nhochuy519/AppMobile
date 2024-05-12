@@ -44,6 +44,7 @@ function UserCart(props) {
                     name: item.product.name,
                     quantity: item.quantity,
                     price: item.price,
+                    size:item.size
                 }
             })
             await instance.post('/user/createOrder',{

@@ -104,7 +104,14 @@ function ProductOrder({callback,name,data,index,cartUpdate}){
                                 -
                             </TouchableOpacity>
                         </View>
-                        
+                        <Text
+                            style={{
+                                
+                                fontWeight:'500'
+                            }}
+                        >
+                            Size:{data.size} 
+                        </Text>
                         <Text
                             style={{
                                 color:mainColor,

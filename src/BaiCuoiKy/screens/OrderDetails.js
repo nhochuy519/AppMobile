@@ -62,7 +62,7 @@ function OrderDetail({data}) {
                             fontSize:17,
                             
                         }}
-                     > Size</Text>
+                     > Size: {product.size}</Text>
                     <Text
                          style={{
                             fontSize:17,
