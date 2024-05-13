@@ -44,7 +44,7 @@ function ProductDetail(props) {
             productId:productData._id,
             quantity,
             price:productData.price,
-            size:productData.size
+            size,
         })
         .then(()=>{
             console.log('thêm vào cart thành công')
